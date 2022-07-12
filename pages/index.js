@@ -18,7 +18,7 @@ export default function Home({initialPokemon}) {
   }
 
   return (
-    <div className="w-full sm:max-w-xl mx-auto space-y-3 bg-white pb-20">
+    <div className="w-full sm:max-w-xl mx-auto space-y-3 bg-white p-5 pb-20">
       <Head>
         <title>Pokedex</title>
         <meta name="description" content="Here is pokedex list for public" />
@@ -26,12 +26,8 @@ export default function Home({initialPokemon}) {
       </Head>
 
       <header className="flex justify-end space-x-3">
-        <div>
-          <button>Compare</button>
-        </div>
-        <div>
-          <button>Filter</button>
-        </div>
+        <button className="underline text-green-800">Compare</button>
+        <button className="underline text-green-800">Filter</button>
       </header>
       <main>
         <section>

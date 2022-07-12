@@ -6,7 +6,7 @@ const PokemonCard = ({pokemon, index}) => {
 
   return (
     <Link href={`/${pokemon.name}`}>
-      <a className="bg-green-100 p-2 rounded-lg">
+      <a className="bg-green-100 p-2 rounded-lg hover:bg-green-500">
         <div className="flex flex-col justify-center items-center">
           <span className="text-md font-semibold">#{pokeIndex}</span>
             <Image
