@@ -25,7 +25,7 @@ export default function Home({initialPokemon}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="flex justify-end">
+      <header className="flex justify-end space-x-3">
         <div>
           <button>Compare</button>
         </div>
