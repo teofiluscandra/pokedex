@@ -16,6 +16,8 @@ function reducer(state, action) {
       return {...state, compareList: state.compareList.filter(pokemon => pokemon.name !== action.payload.name)};
     case 'TOGGLE_COMPARE_MODE':
       return {...state, compareMode: !state.compareMode, compareList: []};
+    case 'TOGGLE_FILTER_MODE':
+      return {...state, filterMode: !state.filterMode}
     default:
       throw new Error(`Unhandled action type.`)
   }
@@ -23,7 +25,9 @@ function reducer(state, action) {
 
 const initialState = {
   compareList: [],
-  compareMode: false
+  compareMode: false,
+  filterMode: false,
+  pokemonList: []
 }
 
 export function AppProvider({ children }) {

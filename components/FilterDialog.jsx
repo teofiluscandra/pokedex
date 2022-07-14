@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useAppContext } from '../context/app-context';
 
 const FilterDialog = () => {
   const [types, setTypes] = useState([])
+  const [, dispatch] = useAppContext()
 
   useEffect(() => {
     async function fetchData() {
@@ -23,7 +25,7 @@ const FilterDialog = () => {
           <div className="flex flex-wrap">
           {
             types.map(type => (
-              <label key={type.name} className="flex px-2 mb-2 mr-1 space-x-1 text-lg bg-green-200 border-2 rounded-lg hover:bg-green-700">
+              <label key={type.name} className="flex px-2 mb-2 mr-1 space-x-1 text-lg bg-green-200 border-2 rounded-lg hover:bg-green-700 hover:text-white">
                 <input type="checkbox" className="cursor-pointer"/>
                 <span className="text-sm font-semibold">{type.name}</span>
               </label>
@@ -33,10 +35,10 @@ const FilterDialog = () => {
         </section>
         <section>
           <h3 className="mb-2 font-semibold">By Generation</h3>
-          <div className="flex space-x-3">
+          <div className="flex flex-wrap">
           {
             ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'].map(generation => (
-              <label key={generation} className="flex px-2 space-x-1 text-lg bg-green-200 border-2 rounded-lg hover:bg-green-700">
+              <label key={generation} className="flex px-2 mb-2 mr-1 space-x-1 text-lg bg-green-200 border-2 rounded-lg hover:bg-green-700">
                 <input type="checkbox" className="cursor-pointer"/>
                 <span className="text-sm font-semibold">{generation}</span>
               </label>
@@ -44,7 +46,7 @@ const FilterDialog = () => {
           }
           </div>
         </section>
-        <button className="inline-flex items-center py-2 px-2.5 text-sm rounded-md text-white font-bold leading-none bg-green-700 justify-center">Save Filter</button>
+        <button className="inline-flex items-center py-2 px-2.5 text-sm rounded-md text-white font-bold leading-none bg-green-700 justify-center" onClick={() => dispatch({type: 'TOGGLE_FILTER_MODE'})}>Save Filter</button>
       </div>
     </div>
   )
