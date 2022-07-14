@@ -1,4 +1,5 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import { getAllPokemon } from '../utils/pokemon_fetch';
 
 export const AppContext = createContext({});
 
@@ -18,6 +19,8 @@ function reducer(state, action) {
       return {...state, compareMode: !state.compareMode, compareList: []};
     case 'TOGGLE_FILTER_MODE':
       return {...state, filterMode: !state.filterMode}
+    case 'SET_POKEMON_LIST':
+      return {...state, pokemonList: [...state.pokemonList, ...action.payload.pokemonList], nextUrl: action.payload.nextUrl};
     default:
       throw new Error(`Unhandled action type.`)
   }
@@ -27,12 +30,21 @@ const initialState = {
   compareList: [],
   compareMode: false,
   filterMode: false,
-  pokemonList: []
+  pokemonList: [],
+  nextUrl: ''
 }
 
 export function AppProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const appContextValue = [state, dispatch];
+
+  // Set All Pokemon List
+  useEffect(() => {
+    (async () => {
+      const { nextUrl, pokemonList } = await getAllPokemon();
+      dispatch({type: 'SET_POKEMON_LIST', payload: {nextUrl, pokemonList}});
+    })()
+  }, []);
 
   return (
     <AppContext.Provider value={appContextValue}>
