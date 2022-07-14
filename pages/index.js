@@ -39,8 +39,8 @@ export default function Home() {
             Pokedex
           </h1>
           <ul className="grid grid-cols-2 gap-10 mt-10">
-            {state.pokemonList.map((pokemon, index) => (
-              <PokemonCard key={pokemon.name + index} pokemon={pokemon} index={index}/>
+            {state.pokemonList.map((pokemon) => (
+              <PokemonCard key={pokemon.name + pokemon.id} pokemon={pokemon}/>
             ))}
           </ul>
         </section>
@@ -57,7 +57,7 @@ export default function Home() {
         </a>
       </footer>
       { state.compareMode && state.compareList && state.compareList.length >= 1 && <CompareCard />}
-      { state.filterMode && <FilterDialog />}
+      <FilterDialog />
     </div>
   )
 }

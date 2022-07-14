@@ -21,6 +21,8 @@ function reducer(state, action) {
       return {...state, filterMode: !state.filterMode}
     case 'SET_POKEMON_LIST':
       return {...state, pokemonList: [...state.pokemonList, ...action.payload.pokemonList], nextUrl: action.payload.nextUrl};
+    case 'SET_FILTER_LIST':
+      return {...state, pokemonList: action.payload};
     default:
       throw new Error(`Unhandled action type.`)
   }

@@ -6,8 +6,8 @@ import colors from '../constants/color';
 import { useAppContext } from '../context/app-context';
 
 
-const PokemonCard = ({ pokemon, index }) => {
-  const pokeIndex = ('000' + (index + 1)).slice(-3)
+const PokemonCard = ({ pokemon }) => {
+  const pokeIndex = ('000' + (parseInt(pokemon.id))).slice(-3)
   const primaryType = pokemon.types.length > 0 ? pokemon.types[0].type.name : null
   const color = colors[primaryType]
   const [state, dispatch] = useAppContext();
