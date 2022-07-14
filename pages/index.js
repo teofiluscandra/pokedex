@@ -44,7 +44,7 @@ export default function Home({pokemonCount, nextUrl, pokemonList}) {
       </Head>
 
       <header className="sticky top-0 left-0 right-0 z-30 flex flex-wrap justify-end px-2 py-3 space-x-5 bg-white">
-        <button className={`${state.compareMode ? 'bg-green-600' : 'bg-white'} py-1 px-3 rounded-2xl`} onClick={compareActiveMode}>Compare</button>
+        <button className={`${state.compareMode ? 'text-white bg-green-600' : 'bg-white'} py-2 px-3 rounded-2xl leading-none`} onClick={compareActiveMode}>Compare</button>
         <button onClick={() => setFilterOpen(!isFilterOpen)}><Filter /></button>
       </header>
       <main className="px-2">

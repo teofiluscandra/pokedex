@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 ul, ol {
   list-style: none;
 }
