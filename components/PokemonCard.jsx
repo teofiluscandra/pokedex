@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { CheckSquare, Square } from 'react-feather';
 import colors from '../constants/color';
 import { useAppContext } from '../context/app-context';
+import { getColorByType } from '../utils/helpers';
 
 
 const PokemonCard = ({ pokemon }) => {
@@ -51,6 +52,11 @@ const PokemonCard = ({ pokemon }) => {
                   height={150}
                 />
               <span className="text-lg font-bold uppercase">{pokemon.name}</span>
+              <div className="flex items-center justify-center">
+                {pokemon.types.map((type, index) => (
+                  <span key={index} className={`inline-block p-2 rounded-xl m-1 text-xs shadow-md border-2 border-gray-600`} style={{backgroundColor: getColorByType(type.type.name)}}>{type.type.name}</span>
+                ))}
+              </div>
             </article>
           </a>
         </Link>
