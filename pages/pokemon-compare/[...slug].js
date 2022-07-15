@@ -1,10 +1,13 @@
 import Image from 'next/image';
+import Header from '../../components/Header';
 import { getColorByType, getPokeIndex } from '../../utils/helpers';
 
 const PokemonCompare = ({ pokemonList }) => {
+  console.log(pokemonList)
   return (
     <main className="w-full max-w-xl mx-auto">
-      <div className="flex">
+      <Header />
+      <div className="flex flex-wrap justify-center">
         {
           pokemonList.map((pokemon, index) => {
             const pokeIndex = getPokeIndex(pokemon.id)
@@ -27,8 +30,37 @@ const PokemonCompare = ({ pokemonList }) => {
             )
           })
         }
+
       </div>
+      <CompareTable title="Basic" categories={[{
+        name: 'Height',
+        value1: pokemonList[0].height,
+        value2: pokemonList[1].height
+      }, {
+        name: 'Weight',
+        value1: pokemonList[0].weight,
+        value2: pokemonList[1].weight
+      }]}/>
     </main>
+  )
+}
+
+const CompareTable = ({title, categories = []}) => {
+  return (
+    <section className="px-4 py-3 rounded-lg shadow-lg">
+      <h2 className="font-semibold">{title}</h2>
+      <table className="w-full table-auto">
+        <tbody>
+          { categories.map(category => (
+            <tr key={category.name}>
+              <td width="75">{category.name}</td>
+              <td>{category.value1}</td>
+              <td>{category.value2}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
   )
 }
 

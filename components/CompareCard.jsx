@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'react-feather';
 import { useAppContext } from '../context/app-context';
+import { getPokeIndex } from '../utils/helpers';
 
 const CompareCard = () => {
   const [state, dispatch] = useAppContext();
@@ -11,7 +12,11 @@ const CompareCard = () => {
       <ul className="flex flex-1 space-x-5">
         { state.compareList && state.compareList.map((pokemon, index) => (
           <li key={pokemon.name} className="relative w-14 h-14">
-            <Image src={pokemon.sprites.front_default} alt={pokemon.name} layout="fill" objectFit="contain" />
+            <Image
+              src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPokeIndex(pokemon.id)}.png`}
+              alt={pokemon.name}
+              layout="fill"
+              objectFit="contain" />
           </li>
         ))}
       </ul>

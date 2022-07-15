@@ -1,8 +1,8 @@
 import { Tab } from '@headlessui/react';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
-import { capitalizeWord } from '../utils/helpers';
+import Header from '../components/Header';
+import { capitalizeWord, getColorByType } from '../utils/helpers';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -18,10 +18,11 @@ const Pokemon = ({pokemon}) => {
   return (
     <div className="w-full min-h-screen p-5 py-12 pb-20 mx-auto space-y-3 bg-white sm:max-w-xl">
       <Head>
-        <title>{pokemon.name}</title>
+        <title>{capitalizeWord(pokemon.name)}</title>
         <meta name="description" content={`Detail of ${pokemon.name}`} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <div className="flex flex-col items-center justify-center">
         <span className="font-semibold">#{pokeIndex}</span>
         <h1 className="font-bold uppercase">{pokemon.name}</h1>
@@ -33,7 +34,7 @@ const Pokemon = ({pokemon}) => {
         />
         <div className="flex items-center justify-center">
           {pokemon.types.map((type, index) => (
-            <span key={index} className={`inline-block bg-green-500 text-white p-2 rounded-xl m-1`}>{type.type.name}</span>
+            <span key={index} className={`inline-block text-white p-2 rounded-xl m-1 text-xs`} style={{backgroundColor: getColorByType(type.type.name)}}>{type.type.name}</span>
           ))}
         </div>
       </div>
@@ -89,10 +90,6 @@ const Pokemon = ({pokemon}) => {
             </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
-
-      <Link href="/">
-        <a type="button" className="inline-block px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out">Back to Home</a>
-      </Link>
     </div>
   )
 }
