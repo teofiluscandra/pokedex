@@ -6,7 +6,7 @@ const PokemonCompare = ({ pokemonList }) => {
   console.log(pokemonList)
   return (
     <main className="w-full max-w-xl mx-auto">
-      <Header />
+      <Header isHome={false}/>
       <div className="flex flex-wrap justify-center">
         {
           pokemonList.map((pokemon, index) => {

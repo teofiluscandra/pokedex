@@ -22,7 +22,7 @@ const Pokemon = ({pokemon}) => {
         <meta name="description" content={`Detail of ${pokemon.name}`} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header isHome={false}/>
       <div className="flex flex-col items-center justify-center">
         <span className="font-semibold">#{pokeIndex}</span>
         <h1 className="font-bold uppercase">{pokemon.name}</h1>
