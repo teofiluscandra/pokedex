@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export const useIntersectionObserver = (callback, deps = []) => {
+export const useIntersectionObserver = (callback) => {
   const ref = useRef(null);
+  const [isFetching, setIsFetching] = useState(false);
+
 
   useEffect(() => {
     if (!window.IntersectionObserver || !ref?.current) return;
@@ -9,7 +11,7 @@ export const useIntersectionObserver = (callback, deps = []) => {
 
     function handleEntries([entry]) {
       if (entry.isIntersecting) {
-        callback();
+        setIsFetching(true);
       }
     }
 
@@ -18,7 +20,12 @@ export const useIntersectionObserver = (callback, deps = []) => {
     observer.observe(node);
 
     return () => observer.unobserve(node);
-  }, deps);
+  }, []);
 
-  return ref;
+  useEffect(() => {
+    if (!isFetching) return;
+    callback();
+  }, [isFetching]);
+
+  return [ref, isFetching, setIsFetching];
 };

@@ -4,12 +4,12 @@ import FilterDialog from '../components/FilterDialog';
 import Header from '../components/Header';
 import PokemonCard from '../components/PokemonCard';
 import { useAppContext } from '../context/app-context';
-import useInfiniteScroll from '../hooks/useInfiniteScroll';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { getAllPokemon } from '../utils/pokemon_fetch';
 
 export default function Home() {
   const [state ,dispatch] = useAppContext();
-  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+  const [ref, isFetching, setIsFetching] = useIntersectionObserver(fetchMoreListItems)
 
   async function fetchMoreListItems() {
     setIsFetching(true);
@@ -39,6 +39,7 @@ export default function Home() {
             ))}
           </ul>
         </section>
+        <div className='h-4 opacity-0' ref={ref}></div>
         {isFetching && <Loading />}
       </main>
 

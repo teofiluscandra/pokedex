@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
-import { getAllPokemon } from '../utils/pokemon_fetch';
+import { createContext, useContext, useReducer } from 'react';
 
 export const AppContext = createContext({});
 
@@ -39,14 +38,6 @@ const initialState = {
 export function AppProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const appContextValue = [state, dispatch];
-
-  // Set All Pokemon List
-  useEffect(() => {
-    (async () => {
-      const { nextUrl, pokemonList } = await getAllPokemon();
-      dispatch({type: 'SET_POKEMON_LIST', payload: {nextUrl, pokemonList}});
-    })()
-  }, []);
 
   return (
     <AppContext.Provider value={appContextValue}>
