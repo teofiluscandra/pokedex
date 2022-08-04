@@ -1,22 +1,32 @@
 const baseURL = "https://pokeapi.co";
+import useSWRInfinite from "swr/infinite";
 
-export const getAllPokemon = async (url) => {
-  const urlFetch = url ? url : `${baseURL}/api/v2/pokemon`;
-  const response = await fetch(urlFetch);
-  const result = await response.json();
+const fetcher = (url) => fetch(url).then(async (res) => {
+  console.log('fetch ', url)
+  const result = await res.json();
   const pokemon = result.results;
-
   const pokemonList = await Promise.all(
     pokemon.map(async (pokemon) => {
       const response = await fetch(pokemon.url);
       return response.json();
     })
   )
+  return pokemonList;
+});
 
-  return {
-    nextUrl: result.next,
-    pokemonList
-  };
+export const usePokemonList = () => {
+  const { data, error, setSize } = useSWRInfinite(
+    (index, previousPageData) => {
+      if (previousPageData && !previousPageData.length) return null;
+      return `${baseURL}/api/v2/pokemon?offset=${index * 20}&limit=20`;
+    },
+    fetcher,
+    {
+      revalidateFirstPage: false
+    }
+  );
+
+  return { data, error, setSize };
 }
 
 export const getPokemonByTypes = async (types) => {

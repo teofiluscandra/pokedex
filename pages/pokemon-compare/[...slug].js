@@ -3,7 +3,6 @@ import Header from '../../components/Header';
 import { getColorByType, getPokeIndex } from '../../utils/helpers';
 
 const PokemonCompare = ({ pokemonList }) => {
-  console.log(pokemonList)
   return (
     <main className="w-full max-w-xl mx-auto">
       <Header isHome={false}/>

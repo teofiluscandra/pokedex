@@ -10,8 +10,8 @@ export const useIntersectionObserver = (callback) => {
     const node = ref.current;
 
     function handleEntries([entry]) {
-      if (entry.isIntersecting) {
-        setIsFetching(true);
+      if (entry) {
+        setIsFetching(entry.isIntersecting);
       }
     }
 
@@ -23,9 +23,8 @@ export const useIntersectionObserver = (callback) => {
   }, []);
 
   useEffect(() => {
-    if (!isFetching) return;
-    callback();
+    if (isFetching) callback();
   }, [isFetching]);
 
-  return [ref, isFetching, setIsFetching];
+  return ref;
 };

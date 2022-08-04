@@ -5,18 +5,13 @@ import Header from '../components/Header';
 import PokemonCard from '../components/PokemonCard';
 import { useAppContext } from '../context/app-context';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { getAllPokemon } from '../utils/pokemon_fetch';
+import { usePokemonList } from '../utils/pokemon_fetch';
 
 export default function Home() {
-  const [state ,dispatch] = useAppContext();
-  const [ref, isFetching, setIsFetching] = useIntersectionObserver(fetchMoreListItems)
-
-  async function fetchMoreListItems() {
-    setIsFetching(true);
-    const { nextUrl, pokemonList } = await getAllPokemon(state.nextUrl);
-    dispatch({type: 'SET_POKEMON_LIST', payload: { nextUrl, pokemonList}});
-    setIsFetching(false);
-  }
+  const [state] = useAppContext();
+  const {data, error, setSize} = usePokemonList();
+  const ref = useIntersectionObserver(() => setSize((size) => size + 1));
+  const pokemonList = data ? [].concat(...data) : [];
 
   return (
     <div className="w-full max-w-xl pb-20 mx-auto space-y-3 bg-white">
@@ -34,13 +29,14 @@ export default function Home() {
             Pokedex
           </h1>
           <ul className="grid grid-cols-2 gap-10 mt-10">
-            {state.pokemonList.map((pokemon) => (
+            {pokemonList.map((pokemon) => (
               <PokemonCard key={pokemon.name + pokemon.id} pokemon={pokemon}/>
             ))}
           </ul>
         </section>
         <div className='h-4 opacity-0' ref={ref}></div>
-        {isFetching && <Loading />}
+
+        {!data && !error && <Loading />}
       </main>
 
       <footer>
