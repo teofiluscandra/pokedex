@@ -1,7 +1,7 @@
 import { Tab } from '@headlessui/react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Header from '../components/Header';
+import Image from '../components/Image';
 import { capitalizeWord, getColorByType } from '../utils/helpers';
 
 function classNames(...classes) {

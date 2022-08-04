@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 import { CheckSquare, Square } from 'react-feather';
 import colors from '../constants/color';
 import { useAppContext } from '../context/app-context';
 import { getColorByType } from '../utils/helpers';
+import Image from "./Image";
 
 
 const PokemonCard = ({ pokemon }) => {
@@ -45,12 +45,15 @@ const PokemonCard = ({ pokemon }) => {
           <a>
             <article className="flex flex-col items-center justify-center hover:animate-pulse">
               <span className="font-semibold text-md">#{pokeIndex}</span>
-                <Image
-                  src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokeIndex}.png`}
-                  alt={pokemon.name}
-                  width={150}
-                  height={150}
-                />
+                <div className="overflow-hidden rounded-t-lg">
+                  <Image
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokeIndex}.png`}
+                    alt={pokemon.name}
+                    width={150}
+                    height={150}
+                  />
+                </div>
+
               <span className="text-lg font-bold uppercase">{pokemon.name}</span>
               <div className="flex items-center justify-center">
                 {pokemon.types.map((type, index) => (

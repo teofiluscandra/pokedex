@@ -2,7 +2,6 @@ const baseURL = "https://pokeapi.co";
 import useSWRInfinite from "swr/infinite";
 
 const fetcher = (url) => fetch(url).then(async (res) => {
-  console.log('fetch ', url)
   const result = await res.json();
   const pokemon = result.results;
   const pokemonList = await Promise.all(

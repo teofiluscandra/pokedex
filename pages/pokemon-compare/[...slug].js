@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Header from '../../components/Header';
+import Image from '../../components/Image';
 import { getColorByType, getPokeIndex } from '../../utils/helpers';
 
 const PokemonCompare = ({ pokemonList }) => {

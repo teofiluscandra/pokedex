@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'react-feather';
 import { useAppContext } from '../context/app-context';
 import { getPokeIndex } from '../utils/helpers';
+import Image from './Image';
 
 const CompareCard = () => {
   const [state, dispatch] = useAppContext();
