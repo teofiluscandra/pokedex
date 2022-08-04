@@ -32,7 +32,9 @@ const FilterDialog = () => {
   async function handleFilterButtonClick() {
     if (selectedTypes.length > 0) {
       const pokemonList = await getPokemonByTypes(selectedTypes)
-      dispatch({type: 'SET_FILTER_LIST', payload: pokemonList})
+      dispatch({type: 'SET_FILTER_LIST', payload: pokemonList, filterList: selectedTypes})
+    } else {
+      dispatch({type: 'SET_FILTER_LIST', filterList: []})
     }
 
     dispatch({type: 'TOGGLE_FILTER_MODE'})

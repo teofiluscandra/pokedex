@@ -11,7 +11,7 @@ export default function Home() {
   const [state] = useAppContext();
   const {data, error, setSize} = usePokemonList();
   const ref = useIntersectionObserver(() => setSize((size) => size + 1));
-  const pokemonList = data ? [].concat(...data) : [];
+  const pokemonList = state.filterList.length > 0 ? state.pokemonList : data ? [].concat(...data) : [];
 
   return (
     <div className="w-full max-w-xl pb-20 mx-auto space-y-3 bg-white">

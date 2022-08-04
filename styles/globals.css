@@ -5,3 +5,13 @@
 ul, ol {
   list-style: none;
 }
+
+.button-icon[data-count]:not([data-count="0"]):before {
+  content: attr(data-count);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 1rem;
+  left: 1.5rem;
+}

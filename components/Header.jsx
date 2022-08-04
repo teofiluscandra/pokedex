@@ -29,7 +29,9 @@ const Header = ({ isHome=true }) => {
   return isHome ? (
     <header className="sticky top-0 left-0 right-0 z-30 flex flex-wrap items-center justify-end px-2 py-3 space-x-5 bg-white">
       <button className={`${state.compareMode ? 'text-white bg-green-600' : 'bg-white'} py-2 px-3 rounded-2xl leading-none`} onClick={() => dispatch({ type: 'TOGGLE_COMPARE_MODE' })}>Compare</button>
-      <button onClick={() => dispatch({type: 'TOGGLE_FILTER_MODE'})}><Filter /></button>
+      <button onClick={() => dispatch({type: 'TOGGLE_FILTER_MODE'})} data-count={state.filterList.length} className="relative button-icon">
+        <Filter />
+      </button>
       <span className="text-xs font-extrabold"><BarChart className={`${isOnline ? 'text-green-500' : 'text-red-500'}`}/>{isOnline ? 'Online' : 'Offline'}</span>
     </header>
   ) :
